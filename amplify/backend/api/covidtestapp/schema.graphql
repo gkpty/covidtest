@@ -4,7 +4,8 @@ type Patient @model @key(fields: ["document_id"]) {
   name: String!
   age: Int!
   coordinates: Coordinates
-  cases: Case @connection(name: "PatientCases")
+  cases: [Case] @connection(name: "PatientCases")
+  locations: [Location] @connection(name: "PatientLocations")
 }
 enum DocumentType {
   cedula
@@ -31,7 +32,9 @@ type Coordinates {
   lat: Float!
   lon: Float!
 }
-type Location {
+type Location @model{
+  id: ID!
   type: String!
-  coordinates: [[[Float]]]!
+  coordinates: Coordinates!
+  patient: Patient @connection(name: "PatientLocations")
 }

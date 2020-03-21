@@ -13,19 +13,20 @@ export const getPatient = /* GraphQL */ `
         lon
       }
       cases {
-        id
-        title
-        patient {
-          document_type
-          document_id
-          name
-          age
+        items {
+          id
+          title
+          createdAt
+          updatedAt
         }
-        tests {
-          nextToken
+        nextToken
+      }
+      locations {
+        items {
+          id
+          type
         }
-        createdAt
-        updatedAt
+        nextToken
       }
     }
   }
@@ -55,10 +56,10 @@ export const listPatients = /* GraphQL */ `
           lon
         }
         cases {
-          id
-          title
-          createdAt
-          updatedAt
+          nextToken
+        }
+        locations {
+          nextToken
         }
       }
       nextToken
@@ -80,10 +81,10 @@ export const getCase = /* GraphQL */ `
           lon
         }
         cases {
-          id
-          title
-          createdAt
-          updatedAt
+          nextToken
+        }
+        locations {
+          nextToken
         }
       }
       tests {
@@ -162,6 +163,59 @@ export const listTests = /* GraphQL */ `
           title
           createdAt
           updatedAt
+        }
+      }
+      nextToken
+    }
+  }
+`;
+export const getLocation = /* GraphQL */ `
+  query GetLocation($id: ID!) {
+    getLocation(id: $id) {
+      id
+      type
+      coordinates {
+        lat
+        lon
+      }
+      patient {
+        document_type
+        document_id
+        name
+        age
+        coordinates {
+          lat
+          lon
+        }
+        cases {
+          nextToken
+        }
+        locations {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const listLocations = /* GraphQL */ `
+  query ListLocations(
+    $filter: ModelLocationFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listLocations(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        type
+        coordinates {
+          lat
+          lon
+        }
+        patient {
+          document_type
+          document_id
+          name
+          age
         }
       }
       nextToken

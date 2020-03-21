@@ -13,19 +13,20 @@ export const onCreatePatient = /* GraphQL */ `
         lon
       }
       cases {
-        id
-        title
-        patient {
-          document_type
-          document_id
-          name
-          age
+        items {
+          id
+          title
+          createdAt
+          updatedAt
         }
-        tests {
-          nextToken
+        nextToken
+      }
+      locations {
+        items {
+          id
+          type
         }
-        createdAt
-        updatedAt
+        nextToken
       }
     }
   }
@@ -42,19 +43,20 @@ export const onUpdatePatient = /* GraphQL */ `
         lon
       }
       cases {
-        id
-        title
-        patient {
-          document_type
-          document_id
-          name
-          age
+        items {
+          id
+          title
+          createdAt
+          updatedAt
         }
-        tests {
-          nextToken
+        nextToken
+      }
+      locations {
+        items {
+          id
+          type
         }
-        createdAt
-        updatedAt
+        nextToken
       }
     }
   }
@@ -71,19 +73,20 @@ export const onDeletePatient = /* GraphQL */ `
         lon
       }
       cases {
-        id
-        title
-        patient {
-          document_type
-          document_id
-          name
-          age
+        items {
+          id
+          title
+          createdAt
+          updatedAt
         }
-        tests {
-          nextToken
+        nextToken
+      }
+      locations {
+        items {
+          id
+          type
         }
-        createdAt
-        updatedAt
+        nextToken
       }
     }
   }
@@ -103,10 +106,10 @@ export const onCreateCase = /* GraphQL */ `
           lon
         }
         cases {
-          id
-          title
-          createdAt
-          updatedAt
+          nextToken
+        }
+        locations {
+          nextToken
         }
       }
       tests {
@@ -136,10 +139,10 @@ export const onUpdateCase = /* GraphQL */ `
           lon
         }
         cases {
-          id
-          title
-          createdAt
-          updatedAt
+          nextToken
+        }
+        locations {
+          nextToken
         }
       }
       tests {
@@ -169,10 +172,10 @@ export const onDeleteCase = /* GraphQL */ `
           lon
         }
         cases {
-          id
-          title
-          createdAt
-          updatedAt
+          nextToken
+        }
+        locations {
+          nextToken
         }
       }
       tests {
@@ -252,6 +255,90 @@ export const onDeleteTest = /* GraphQL */ `
         }
         createdAt
         updatedAt
+      }
+    }
+  }
+`;
+export const onCreateLocation = /* GraphQL */ `
+  subscription OnCreateLocation {
+    onCreateLocation {
+      id
+      type
+      coordinates {
+        lat
+        lon
+      }
+      patient {
+        document_type
+        document_id
+        name
+        age
+        coordinates {
+          lat
+          lon
+        }
+        cases {
+          nextToken
+        }
+        locations {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onUpdateLocation = /* GraphQL */ `
+  subscription OnUpdateLocation {
+    onUpdateLocation {
+      id
+      type
+      coordinates {
+        lat
+        lon
+      }
+      patient {
+        document_type
+        document_id
+        name
+        age
+        coordinates {
+          lat
+          lon
+        }
+        cases {
+          nextToken
+        }
+        locations {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const onDeleteLocation = /* GraphQL */ `
+  subscription OnDeleteLocation {
+    onDeleteLocation {
+      id
+      type
+      coordinates {
+        lat
+        lon
+      }
+      patient {
+        document_type
+        document_id
+        name
+        age
+        coordinates {
+          lat
+          lon
+        }
+        cases {
+          nextToken
+        }
+        locations {
+          nextToken
+        }
       }
     }
   }

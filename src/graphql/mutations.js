@@ -16,19 +16,20 @@ export const createPatient = /* GraphQL */ `
         lon
       }
       cases {
-        id
-        title
-        patient {
-          document_type
-          document_id
-          name
-          age
+        items {
+          id
+          title
+          createdAt
+          updatedAt
         }
-        tests {
-          nextToken
+        nextToken
+      }
+      locations {
+        items {
+          id
+          type
         }
-        createdAt
-        updatedAt
+        nextToken
       }
     }
   }
@@ -48,19 +49,20 @@ export const updatePatient = /* GraphQL */ `
         lon
       }
       cases {
-        id
-        title
-        patient {
-          document_type
-          document_id
-          name
-          age
+        items {
+          id
+          title
+          createdAt
+          updatedAt
         }
-        tests {
-          nextToken
+        nextToken
+      }
+      locations {
+        items {
+          id
+          type
         }
-        createdAt
-        updatedAt
+        nextToken
       }
     }
   }
@@ -80,19 +82,20 @@ export const deletePatient = /* GraphQL */ `
         lon
       }
       cases {
-        id
-        title
-        patient {
-          document_type
-          document_id
-          name
-          age
+        items {
+          id
+          title
+          createdAt
+          updatedAt
         }
-        tests {
-          nextToken
+        nextToken
+      }
+      locations {
+        items {
+          id
+          type
         }
-        createdAt
-        updatedAt
+        nextToken
       }
     }
   }
@@ -115,10 +118,10 @@ export const createCase = /* GraphQL */ `
           lon
         }
         cases {
-          id
-          title
-          createdAt
-          updatedAt
+          nextToken
+        }
+        locations {
+          nextToken
         }
       }
       tests {
@@ -151,10 +154,10 @@ export const updateCase = /* GraphQL */ `
           lon
         }
         cases {
-          id
-          title
-          createdAt
-          updatedAt
+          nextToken
+        }
+        locations {
+          nextToken
         }
       }
       tests {
@@ -187,10 +190,10 @@ export const deleteCase = /* GraphQL */ `
           lon
         }
         cases {
-          id
-          title
-          createdAt
-          updatedAt
+          nextToken
+        }
+        locations {
+          nextToken
         }
       }
       tests {
@@ -279,6 +282,99 @@ export const deleteTest = /* GraphQL */ `
         }
         createdAt
         updatedAt
+      }
+    }
+  }
+`;
+export const createLocation = /* GraphQL */ `
+  mutation CreateLocation(
+    $input: CreateLocationInput!
+    $condition: ModelLocationConditionInput
+  ) {
+    createLocation(input: $input, condition: $condition) {
+      id
+      type
+      coordinates {
+        lat
+        lon
+      }
+      patient {
+        document_type
+        document_id
+        name
+        age
+        coordinates {
+          lat
+          lon
+        }
+        cases {
+          nextToken
+        }
+        locations {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const updateLocation = /* GraphQL */ `
+  mutation UpdateLocation(
+    $input: UpdateLocationInput!
+    $condition: ModelLocationConditionInput
+  ) {
+    updateLocation(input: $input, condition: $condition) {
+      id
+      type
+      coordinates {
+        lat
+        lon
+      }
+      patient {
+        document_type
+        document_id
+        name
+        age
+        coordinates {
+          lat
+          lon
+        }
+        cases {
+          nextToken
+        }
+        locations {
+          nextToken
+        }
+      }
+    }
+  }
+`;
+export const deleteLocation = /* GraphQL */ `
+  mutation DeleteLocation(
+    $input: DeleteLocationInput!
+    $condition: ModelLocationConditionInput
+  ) {
+    deleteLocation(input: $input, condition: $condition) {
+      id
+      type
+      coordinates {
+        lat
+        lon
+      }
+      patient {
+        document_type
+        document_id
+        name
+        age
+        coordinates {
+          lat
+          lon
+        }
+        cases {
+          nextToken
+        }
+        locations {
+          nextToken
+        }
       }
     }
   }
