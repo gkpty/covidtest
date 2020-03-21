@@ -24,6 +24,8 @@ export const getPatient = /* GraphQL */ `
         tests {
           nextToken
         }
+        createdAt
+        updatedAt
       }
     }
   }
@@ -55,6 +57,8 @@ export const listPatients = /* GraphQL */ `
         cases {
           id
           title
+          createdAt
+          updatedAt
         }
       }
       nextToken
@@ -78,15 +82,19 @@ export const getCase = /* GraphQL */ `
         cases {
           id
           title
+          createdAt
+          updatedAt
         }
       }
       tests {
         items {
           id
-          content
+          result
         }
         nextToken
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -109,6 +117,8 @@ export const listCases = /* GraphQL */ `
         tests {
           nextToken
         }
+        createdAt
+        updatedAt
       }
       nextToken
     }
@@ -118,7 +128,7 @@ export const getTest = /* GraphQL */ `
   query GetTest($id: ID!) {
     getTest(id: $id) {
       id
-      content
+      result
       case {
         id
         title
@@ -131,6 +141,8 @@ export const getTest = /* GraphQL */ `
         tests {
           nextToken
         }
+        createdAt
+        updatedAt
       }
     }
   }
@@ -144,10 +156,12 @@ export const listTests = /* GraphQL */ `
     listTests(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        content
+        result
         case {
           id
           title
+          createdAt
+          updatedAt
         }
       }
       nextToken

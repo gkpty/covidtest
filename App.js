@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import CaseRequestForm from './components/CaseRequestForm'
+import CaseRequestForm from './components/CaseRequestForm';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      <Text style={styles.title}>Covid Test</Text>
       <CaseRequestForm></CaseRequestForm>
     </View>
   );
@@ -14,8 +14,21 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    marginTop: 50,
+    marginHorizontal: 16,
+    justifyContent: "center"
+  },
+  title: {
+    alignSelf: "center",
+    fontSize: 30
+  },
+  fixToText: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  separator: {
+    marginVertical: 8,
+    borderBottomColor: '#737373',
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
 });

@@ -24,6 +24,8 @@ export const onCreatePatient = /* GraphQL */ `
         tests {
           nextToken
         }
+        createdAt
+        updatedAt
       }
     }
   }
@@ -51,6 +53,8 @@ export const onUpdatePatient = /* GraphQL */ `
         tests {
           nextToken
         }
+        createdAt
+        updatedAt
       }
     }
   }
@@ -78,6 +82,8 @@ export const onDeletePatient = /* GraphQL */ `
         tests {
           nextToken
         }
+        createdAt
+        updatedAt
       }
     }
   }
@@ -99,15 +105,19 @@ export const onCreateCase = /* GraphQL */ `
         cases {
           id
           title
+          createdAt
+          updatedAt
         }
       }
       tests {
         items {
           id
-          content
+          result
         }
         nextToken
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -128,15 +138,19 @@ export const onUpdateCase = /* GraphQL */ `
         cases {
           id
           title
+          createdAt
+          updatedAt
         }
       }
       tests {
         items {
           id
-          content
+          result
         }
         nextToken
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -157,15 +171,19 @@ export const onDeleteCase = /* GraphQL */ `
         cases {
           id
           title
+          createdAt
+          updatedAt
         }
       }
       tests {
         items {
           id
-          content
+          result
         }
         nextToken
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -173,7 +191,7 @@ export const onCreateTest = /* GraphQL */ `
   subscription OnCreateTest {
     onCreateTest {
       id
-      content
+      result
       case {
         id
         title
@@ -186,6 +204,8 @@ export const onCreateTest = /* GraphQL */ `
         tests {
           nextToken
         }
+        createdAt
+        updatedAt
       }
     }
   }
@@ -194,7 +214,7 @@ export const onUpdateTest = /* GraphQL */ `
   subscription OnUpdateTest {
     onUpdateTest {
       id
-      content
+      result
       case {
         id
         title
@@ -207,6 +227,8 @@ export const onUpdateTest = /* GraphQL */ `
         tests {
           nextToken
         }
+        createdAt
+        updatedAt
       }
     }
   }
@@ -215,7 +237,7 @@ export const onDeleteTest = /* GraphQL */ `
   subscription OnDeleteTest {
     onDeleteTest {
       id
-      content
+      result
       case {
         id
         title
@@ -228,6 +250,8 @@ export const onDeleteTest = /* GraphQL */ `
         tests {
           nextToken
         }
+        createdAt
+        updatedAt
       }
     }
   }

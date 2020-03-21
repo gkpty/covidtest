@@ -3,11 +3,11 @@ type Patient @model @key(fields: ["document_id"]) {
   document_id: ID!
   name: String!
   age: Int!
-  coordinates: Coordinates!
+  coordinates: Coordinates
   cases: Case @connection(name: "PatientCases")
 }
 enum DocumentType {
-  cedula,
+  cedula
   pasaporte
 }
 type Case @model {
@@ -15,10 +15,16 @@ type Case @model {
   title: String!
   patient: Patient @connection(name: "PatientCases")
   tests: [Test] @connection(name: "CaseTests")
+  createdAt: String
+  updatedAt: String
+}
+enum Result {
+  positive
+  negative
 }
 type Test @model {
   id: ID!
-  content: String
+  result: Result
   case: Case @connection(name: "CaseTests")
 }
 type Coordinates {

@@ -27,6 +27,8 @@ export const createPatient = /* GraphQL */ `
         tests {
           nextToken
         }
+        createdAt
+        updatedAt
       }
     }
   }
@@ -57,6 +59,8 @@ export const updatePatient = /* GraphQL */ `
         tests {
           nextToken
         }
+        createdAt
+        updatedAt
       }
     }
   }
@@ -87,6 +91,8 @@ export const deletePatient = /* GraphQL */ `
         tests {
           nextToken
         }
+        createdAt
+        updatedAt
       }
     }
   }
@@ -111,15 +117,19 @@ export const createCase = /* GraphQL */ `
         cases {
           id
           title
+          createdAt
+          updatedAt
         }
       }
       tests {
         items {
           id
-          content
+          result
         }
         nextToken
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -143,15 +153,19 @@ export const updateCase = /* GraphQL */ `
         cases {
           id
           title
+          createdAt
+          updatedAt
         }
       }
       tests {
         items {
           id
-          content
+          result
         }
         nextToken
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -175,15 +189,19 @@ export const deleteCase = /* GraphQL */ `
         cases {
           id
           title
+          createdAt
+          updatedAt
         }
       }
       tests {
         items {
           id
-          content
+          result
         }
         nextToken
       }
+      createdAt
+      updatedAt
     }
   }
 `;
@@ -194,7 +212,7 @@ export const createTest = /* GraphQL */ `
   ) {
     createTest(input: $input, condition: $condition) {
       id
-      content
+      result
       case {
         id
         title
@@ -207,6 +225,8 @@ export const createTest = /* GraphQL */ `
         tests {
           nextToken
         }
+        createdAt
+        updatedAt
       }
     }
   }
@@ -218,7 +238,7 @@ export const updateTest = /* GraphQL */ `
   ) {
     updateTest(input: $input, condition: $condition) {
       id
-      content
+      result
       case {
         id
         title
@@ -231,6 +251,8 @@ export const updateTest = /* GraphQL */ `
         tests {
           nextToken
         }
+        createdAt
+        updatedAt
       }
     }
   }
@@ -242,7 +264,7 @@ export const deleteTest = /* GraphQL */ `
   ) {
     deleteTest(input: $input, condition: $condition) {
       id
-      content
+      result
       case {
         id
         title
@@ -255,6 +277,8 @@ export const deleteTest = /* GraphQL */ `
         tests {
           nextToken
         }
+        createdAt
+        updatedAt
       }
     }
   }
