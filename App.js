@@ -1,13 +1,12 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import Amplify from 'aws-amplify';
-import amplify from './aws-exports';
+import CaseRequestForm from './components/CaseRequestForm'
 
 export default function App() {
-  Amplify.configure(amplify);
   return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
+      <CaseRequestForm></CaseRequestForm>
     </View>
   );
 }

@@ -1,0 +1,31 @@
+type Patient @model @key(fields: ["document_id"]) {
+  document_type: DocumentType!
+  document_id: ID!
+  name: String!
+  age: Int!
+  coordinates: Coordinates!
+  cases: Case @connection(name: "PatientCases")
+}
+enum DocumentType {
+  cedula,
+  pasaporte
+}
+type Case @model {
+  id: ID!
+  title: String!
+  patient: Patient @connection(name: "PatientCases")
+  tests: [Test] @connection(name: "CaseTests")
+}
+type Test @model {
+  id: ID!
+  content: String
+  case: Case @connection(name: "CaseTests")
+}
+type Coordinates {
+  lat: Float!
+  lon: Float!
+}
+type Location {
+  type: String!
+  coordinates: [[[Float]]]!
+}
