@@ -25,11 +25,53 @@ export default class LocationUpdate extends Component {
         errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
       });
     } else {
-      this._watchLocationAsync();
+      this.watchLocationAsync();
     }
   }
 
-  onPressButton = () =>{
+  watchLocationAsync = async () => {
+    let permissions = await Permissions.askAsync(Permissions.LOCATION);
+    if (permissions.status == 'granted') {
+      //if Platform.OS = 'ios 
+      // if permissions.permissions.location.ios.scope === always
+      /* await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
+        timeInterval:"3", 
+        distanceInterval:"1"
+      }); */
+
+      Location.watchPositionAsync({distanceInterval:"20"}, (location)=>{
+        this.setState({ location });
+        console.log(location)
+        let input = {
+          "platform":Platform.OS,
+          "coordinates":{
+            "lat":location.coords.latitude,
+            "lon":location.coords.longitude
+          }
+        }
+        this.CreateLocation(input);
+      });
+    }
+    else {
+      this.setState({
+        errorMessage: 'Permission to access location was denied',
+      });
+    }
+  };
+
+  async CreateLocation(input) {
+    await API.graphql(graphqlOperation(createLocation, {input: input}))
+      .then (result => {
+          console.log('succesfully created a new location')
+          return 
+      })
+      .catch(err => {
+        console.log('error: ', err)
+        return 'err'
+      });
+  }
+
+ /*  onPressButton = () =>{
     let data = {
       "type":Platform.OS,
       "coordinates":{
@@ -38,7 +80,7 @@ export default class LocationUpdate extends Component {
       }
     }
     this.CreateLocation(data)
-  }
+  } */
   
   /* componentDidMount(){
     this._watchLocationAsync()
@@ -56,35 +98,7 @@ export default class LocationUpdate extends Component {
     this.setState({ location });
     console.log(location)
   }; */
-  async CreateLocation(input) {
-    await API.graphql(graphqlOperation(createLocation, {input: input}))
-      .then (result => {
-          console.log('succesfully created a new location')
-          return 
-      })
-      .catch(err => {
-        console.log('error: ', err)
-        return 'err'
-      });
-  }
-
-
-  _watchLocationAsync = async () => {
-    let permissions = await Permissions.askAsync(Permissions.LOCATION);
-    if (permissions.status == 'granted') {
-      //if Platform.OS = 'ios 
-      // if permissions.permissions.location.ios.scope === always
-      await Location.startLocationUpdatesAsync(LOCATION_TASK_NAME, {
-        timeInterval:"3", 
-        distanceInterval:"1"
-      });
-    }
-    else {
-      this.setState({
-        errorMessage: 'Permission to access location was denied',
-      });
-    }
-  };
+  
 
   render() {
     let text = 'Waiting..';
@@ -106,7 +120,7 @@ export default class LocationUpdate extends Component {
   }
 }
 
-//task manager to get location
+/* //task manager to get location
 TaskManager.defineTask(LOCATION_TASK_NAME, ({ data, error }) => {
   if (error) {
     // Error occurred - check `error.message` for more details.
@@ -122,9 +136,9 @@ TaskManager.defineTask(LOCATION_TASK_NAME, ({ data, error }) => {
       }
     }
     // create locations
-    //
+    console.log(output)
   }
-});
+}); */
 
 const styles = StyleSheet.create({
   container: {
