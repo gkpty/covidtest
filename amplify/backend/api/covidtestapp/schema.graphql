@@ -1,6 +1,7 @@
-type Patient @model @key(fields: ["document_id"]) {
+type Patient @model @key(fields: ["document_number"]) {
+  id: ID!
   document_type: DocumentType!
-  document_id: ID!
+  document_number: String!
   name: String!
   age: Int!
   coordinates: Coordinates
@@ -25,6 +26,7 @@ enum Result {
 }
 type Test @model {
   id: ID!
+  type: String!
   result: Result
   case: Case @connection(name: "CaseTests")
 }
@@ -34,7 +36,7 @@ type Coordinates {
 }
 type Location @model{
   id: ID!
-  type: String!
+  platform: String!
   coordinates: Coordinates!
   patient: Patient @connection(name: "PatientLocations")
 }

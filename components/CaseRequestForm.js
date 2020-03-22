@@ -21,7 +21,9 @@ export default class CaseRequestForm extends Component {
   async createPatient(input) {
     await API.graphql(graphqlOperation(createPatient, {input: input}))
       .then (result => {
-          console.log('succesfully created a new patient')
+          let patient_id = result.data.createPatient.document_id
+          console.log(patient_id)
+          //store in expo safe storage
           return 'Success'
       })
       .catch(err => {

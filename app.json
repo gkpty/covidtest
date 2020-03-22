@@ -24,7 +24,16 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSLocationWhenInUseUsageDescription":"This app uses your location when in use to help end the corona virus pandemic quickly. Only a broad approxiation of the location is available to the public.", 
+        "NSLocationAlwaysAndWhenInUseUsageDescription":"This app uses your location when its in the background to help end the corona virus pandemic quickly. Only a broad approxiation of the location is available to the public.",
+        "NSLocationAlwaysUsageDescription":"This app uses your location as long as its installed to help end the corona virus pandemic quickly. Only a broad approxiation of the location is available to the public.",
+        "UIBackgroundModes": [
+          "location",
+          "fetch"
+        ]
+      }
     }
   }
 }
