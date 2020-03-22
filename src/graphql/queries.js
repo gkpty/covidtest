@@ -2,10 +2,11 @@
 // this is an auto generated file. This will be overwritten
 
 export const getPatient = /* GraphQL */ `
-  query GetPatient($document_id: ID!) {
-    getPatient(document_id: $document_id) {
+  query GetPatient($id: ID!) {
+    getPatient(id: $id) {
+      id
       document_type
-      document_id
+      document_number
       name
       age
       coordinates {
@@ -24,7 +25,8 @@ export const getPatient = /* GraphQL */ `
       locations {
         items {
           id
-          type
+          platform
+          createdAt
         }
         nextToken
       }
@@ -33,22 +35,15 @@ export const getPatient = /* GraphQL */ `
 `;
 export const listPatients = /* GraphQL */ `
   query ListPatients(
-    $document_id: ID
     $filter: ModelPatientFilterInput
     $limit: Int
     $nextToken: String
-    $sortDirection: ModelSortDirection
   ) {
-    listPatients(
-      document_id: $document_id
-      filter: $filter
-      limit: $limit
-      nextToken: $nextToken
-      sortDirection: $sortDirection
-    ) {
+    listPatients(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
+        id
         document_type
-        document_id
+        document_number
         name
         age
         coordinates {
@@ -72,8 +67,9 @@ export const getCase = /* GraphQL */ `
       id
       title
       patient {
+        id
         document_type
-        document_id
+        document_number
         name
         age
         coordinates {
@@ -90,6 +86,7 @@ export const getCase = /* GraphQL */ `
       tests {
         items {
           id
+          type
           result
         }
         nextToken
@@ -110,8 +107,9 @@ export const listCases = /* GraphQL */ `
         id
         title
         patient {
+          id
           document_type
-          document_id
+          document_number
           name
           age
         }
@@ -129,13 +127,15 @@ export const getTest = /* GraphQL */ `
   query GetTest($id: ID!) {
     getTest(id: $id) {
       id
+      type
       result
       case {
         id
         title
         patient {
+          id
           document_type
-          document_id
+          document_number
           name
           age
         }
@@ -157,6 +157,7 @@ export const listTests = /* GraphQL */ `
     listTests(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
+        type
         result
         case {
           id
@@ -173,14 +174,15 @@ export const getLocation = /* GraphQL */ `
   query GetLocation($id: ID!) {
     getLocation(id: $id) {
       id
-      type
+      platform
       coordinates {
         lat
         lon
       }
       patient {
+        id
         document_type
-        document_id
+        document_number
         name
         age
         coordinates {
@@ -194,6 +196,7 @@ export const getLocation = /* GraphQL */ `
           nextToken
         }
       }
+      createdAt
     }
   }
 `;
@@ -206,17 +209,19 @@ export const listLocations = /* GraphQL */ `
     listLocations(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        type
+        platform
         coordinates {
           lat
           lon
         }
         patient {
+          id
           document_type
-          document_id
+          document_number
           name
           age
         }
+        createdAt
       }
       nextToken
     }

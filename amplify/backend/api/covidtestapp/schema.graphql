@@ -1,4 +1,4 @@
-type Patient @model @key(fields: ["document_number"]) {
+type Patient @model {
   id: ID!
   document_type: DocumentType!
   document_number: String!
@@ -39,4 +39,5 @@ type Location @model{
   platform: String!
   coordinates: Coordinates!
   patient: Patient @connection(name: "PatientLocations")
+  createdAt: String
 }

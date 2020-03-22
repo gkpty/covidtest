@@ -7,8 +7,9 @@ export const createPatient = /* GraphQL */ `
     $condition: ModelPatientConditionInput
   ) {
     createPatient(input: $input, condition: $condition) {
+      id
       document_type
-      document_id
+      document_number
       name
       age
       coordinates {
@@ -27,7 +28,8 @@ export const createPatient = /* GraphQL */ `
       locations {
         items {
           id
-          type
+          platform
+          createdAt
         }
         nextToken
       }
@@ -40,8 +42,9 @@ export const updatePatient = /* GraphQL */ `
     $condition: ModelPatientConditionInput
   ) {
     updatePatient(input: $input, condition: $condition) {
+      id
       document_type
-      document_id
+      document_number
       name
       age
       coordinates {
@@ -60,7 +63,8 @@ export const updatePatient = /* GraphQL */ `
       locations {
         items {
           id
-          type
+          platform
+          createdAt
         }
         nextToken
       }
@@ -73,8 +77,9 @@ export const deletePatient = /* GraphQL */ `
     $condition: ModelPatientConditionInput
   ) {
     deletePatient(input: $input, condition: $condition) {
+      id
       document_type
-      document_id
+      document_number
       name
       age
       coordinates {
@@ -93,7 +98,8 @@ export const deletePatient = /* GraphQL */ `
       locations {
         items {
           id
-          type
+          platform
+          createdAt
         }
         nextToken
       }
@@ -109,8 +115,9 @@ export const createCase = /* GraphQL */ `
       id
       title
       patient {
+        id
         document_type
-        document_id
+        document_number
         name
         age
         coordinates {
@@ -127,6 +134,7 @@ export const createCase = /* GraphQL */ `
       tests {
         items {
           id
+          type
           result
         }
         nextToken
@@ -145,8 +153,9 @@ export const updateCase = /* GraphQL */ `
       id
       title
       patient {
+        id
         document_type
-        document_id
+        document_number
         name
         age
         coordinates {
@@ -163,6 +172,7 @@ export const updateCase = /* GraphQL */ `
       tests {
         items {
           id
+          type
           result
         }
         nextToken
@@ -181,8 +191,9 @@ export const deleteCase = /* GraphQL */ `
       id
       title
       patient {
+        id
         document_type
-        document_id
+        document_number
         name
         age
         coordinates {
@@ -199,6 +210,7 @@ export const deleteCase = /* GraphQL */ `
       tests {
         items {
           id
+          type
           result
         }
         nextToken
@@ -215,13 +227,15 @@ export const createTest = /* GraphQL */ `
   ) {
     createTest(input: $input, condition: $condition) {
       id
+      type
       result
       case {
         id
         title
         patient {
+          id
           document_type
-          document_id
+          document_number
           name
           age
         }
@@ -241,13 +255,15 @@ export const updateTest = /* GraphQL */ `
   ) {
     updateTest(input: $input, condition: $condition) {
       id
+      type
       result
       case {
         id
         title
         patient {
+          id
           document_type
-          document_id
+          document_number
           name
           age
         }
@@ -267,13 +283,15 @@ export const deleteTest = /* GraphQL */ `
   ) {
     deleteTest(input: $input, condition: $condition) {
       id
+      type
       result
       case {
         id
         title
         patient {
+          id
           document_type
-          document_id
+          document_number
           name
           age
         }
@@ -293,14 +311,15 @@ export const createLocation = /* GraphQL */ `
   ) {
     createLocation(input: $input, condition: $condition) {
       id
-      type
+      platform
       coordinates {
         lat
         lon
       }
       patient {
+        id
         document_type
-        document_id
+        document_number
         name
         age
         coordinates {
@@ -314,6 +333,7 @@ export const createLocation = /* GraphQL */ `
           nextToken
         }
       }
+      createdAt
     }
   }
 `;
@@ -324,14 +344,15 @@ export const updateLocation = /* GraphQL */ `
   ) {
     updateLocation(input: $input, condition: $condition) {
       id
-      type
+      platform
       coordinates {
         lat
         lon
       }
       patient {
+        id
         document_type
-        document_id
+        document_number
         name
         age
         coordinates {
@@ -345,6 +366,7 @@ export const updateLocation = /* GraphQL */ `
           nextToken
         }
       }
+      createdAt
     }
   }
 `;
@@ -355,14 +377,15 @@ export const deleteLocation = /* GraphQL */ `
   ) {
     deleteLocation(input: $input, condition: $condition) {
       id
-      type
+      platform
       coordinates {
         lat
         lon
       }
       patient {
+        id
         document_type
-        document_id
+        document_number
         name
         age
         coordinates {
@@ -376,6 +399,7 @@ export const deleteLocation = /* GraphQL */ `
           nextToken
         }
       }
+      createdAt
     }
   }
 `;

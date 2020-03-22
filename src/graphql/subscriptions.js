@@ -4,8 +4,9 @@
 export const onCreatePatient = /* GraphQL */ `
   subscription OnCreatePatient {
     onCreatePatient {
+      id
       document_type
-      document_id
+      document_number
       name
       age
       coordinates {
@@ -24,7 +25,8 @@ export const onCreatePatient = /* GraphQL */ `
       locations {
         items {
           id
-          type
+          platform
+          createdAt
         }
         nextToken
       }
@@ -34,8 +36,9 @@ export const onCreatePatient = /* GraphQL */ `
 export const onUpdatePatient = /* GraphQL */ `
   subscription OnUpdatePatient {
     onUpdatePatient {
+      id
       document_type
-      document_id
+      document_number
       name
       age
       coordinates {
@@ -54,7 +57,8 @@ export const onUpdatePatient = /* GraphQL */ `
       locations {
         items {
           id
-          type
+          platform
+          createdAt
         }
         nextToken
       }
@@ -64,8 +68,9 @@ export const onUpdatePatient = /* GraphQL */ `
 export const onDeletePatient = /* GraphQL */ `
   subscription OnDeletePatient {
     onDeletePatient {
+      id
       document_type
-      document_id
+      document_number
       name
       age
       coordinates {
@@ -84,7 +89,8 @@ export const onDeletePatient = /* GraphQL */ `
       locations {
         items {
           id
-          type
+          platform
+          createdAt
         }
         nextToken
       }
@@ -97,8 +103,9 @@ export const onCreateCase = /* GraphQL */ `
       id
       title
       patient {
+        id
         document_type
-        document_id
+        document_number
         name
         age
         coordinates {
@@ -115,6 +122,7 @@ export const onCreateCase = /* GraphQL */ `
       tests {
         items {
           id
+          type
           result
         }
         nextToken
@@ -130,8 +138,9 @@ export const onUpdateCase = /* GraphQL */ `
       id
       title
       patient {
+        id
         document_type
-        document_id
+        document_number
         name
         age
         coordinates {
@@ -148,6 +157,7 @@ export const onUpdateCase = /* GraphQL */ `
       tests {
         items {
           id
+          type
           result
         }
         nextToken
@@ -163,8 +173,9 @@ export const onDeleteCase = /* GraphQL */ `
       id
       title
       patient {
+        id
         document_type
-        document_id
+        document_number
         name
         age
         coordinates {
@@ -181,6 +192,7 @@ export const onDeleteCase = /* GraphQL */ `
       tests {
         items {
           id
+          type
           result
         }
         nextToken
@@ -194,13 +206,15 @@ export const onCreateTest = /* GraphQL */ `
   subscription OnCreateTest {
     onCreateTest {
       id
+      type
       result
       case {
         id
         title
         patient {
+          id
           document_type
-          document_id
+          document_number
           name
           age
         }
@@ -217,13 +231,15 @@ export const onUpdateTest = /* GraphQL */ `
   subscription OnUpdateTest {
     onUpdateTest {
       id
+      type
       result
       case {
         id
         title
         patient {
+          id
           document_type
-          document_id
+          document_number
           name
           age
         }
@@ -240,13 +256,15 @@ export const onDeleteTest = /* GraphQL */ `
   subscription OnDeleteTest {
     onDeleteTest {
       id
+      type
       result
       case {
         id
         title
         patient {
+          id
           document_type
-          document_id
+          document_number
           name
           age
         }
@@ -263,14 +281,15 @@ export const onCreateLocation = /* GraphQL */ `
   subscription OnCreateLocation {
     onCreateLocation {
       id
-      type
+      platform
       coordinates {
         lat
         lon
       }
       patient {
+        id
         document_type
-        document_id
+        document_number
         name
         age
         coordinates {
@@ -284,6 +303,7 @@ export const onCreateLocation = /* GraphQL */ `
           nextToken
         }
       }
+      createdAt
     }
   }
 `;
@@ -291,14 +311,15 @@ export const onUpdateLocation = /* GraphQL */ `
   subscription OnUpdateLocation {
     onUpdateLocation {
       id
-      type
+      platform
       coordinates {
         lat
         lon
       }
       patient {
+        id
         document_type
-        document_id
+        document_number
         name
         age
         coordinates {
@@ -312,6 +333,7 @@ export const onUpdateLocation = /* GraphQL */ `
           nextToken
         }
       }
+      createdAt
     }
   }
 `;
@@ -319,14 +341,15 @@ export const onDeleteLocation = /* GraphQL */ `
   subscription OnDeleteLocation {
     onDeleteLocation {
       id
-      type
+      platform
       coordinates {
         lat
         lon
       }
       patient {
+        id
         document_type
-        document_id
+        document_number
         name
         age
         coordinates {
@@ -340,6 +363,7 @@ export const onDeleteLocation = /* GraphQL */ `
           nextToken
         }
       }
+      createdAt
     }
   }
 `;

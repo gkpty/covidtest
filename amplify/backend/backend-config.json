@@ -9,7 +9,7 @@
 					"defaultAuthentication": {
 						"authenticationType": "API_KEY",
 						"apiKeyConfig": {
-							"description": "covid-test-api",
+							"description": "covid-test-api-key",
 							"apiKeyExpirationDays": "30"
 						}
 					}
@@ -17,10 +17,5 @@
 			}
 		}
 	},
-	"hosting": {
-		"amplifyhosting": {
-			"service": "amplifyhosting",
-			"type": "cicd"
-		}
-	}
+	"hosting": {}
 }
