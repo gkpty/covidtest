@@ -38,7 +38,7 @@ export default class LocationUpdate extends Component {
         timeInterval:"3", 
         distanceInterval:"1"
       }); */
-      Location.watchPositionAsync({distanceInterval:"20"}, (location)=>{
+      await Location.watchPositionAsync({distanceInterval:"20", timeInterval:"43200000"}, (location)=>{
         this.setState({ location });
         console.log(location)
         let input = {
