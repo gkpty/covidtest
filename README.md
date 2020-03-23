@@ -10,10 +10,6 @@ In this platform each organization that deploys their own version owns their dat
 
 The personal data of patients is encrypted and only visible to the lab that is administering the test and the local governement in charge.
 
-***If you are a patient**: This project will soon be hosting a website with all of the official organizations in each country that are hosting this platform and their information. Please search for local organizations in your country that are using this platform andt look for the name of the app that you need to install.*
-
-***If you are an NGO** If your local government is using our platform please contact them directly. If the platform is not active in your region contact us.*
-
 # The platform
 ![alt text](/img/covidtest-diagram.png)
 
@@ -34,14 +30,11 @@ The personal data of patients is encrypted and only visible to the lab that is a
 - **Its Free and Open Source** 
   - Enables each country to customize their own private versions while still having access to collaborations from an international community 
 
-## Second Phase
-It would be really cool to help local organizations fighting corona virus recieve crowd funds to procure/purchase more tests, treatments and supplies.
-
-**Funds  in the form of**
+## Phase 2
+It would be nice to help local organizations fighting corona virus recieve crowd funds in the form of:
 1. credit card processing (local integrations)
 2. paypal integration
 3. coinbase commerce integration: crypto currencies (anonymous donations)
-
 
 # Installation
 *This section is meant for Local Governments/ONG's that will be deploying their own version of the application, or for individual developers that want to contribute to the project*
@@ -54,19 +47,11 @@ It would be really cool to help local organizations fighting corona virus reciev
 3. Install the AWS Amplify CLI globally
 
 ## Installation
-1. Fork the parent repo.
-4. at the root of the project run npm install
-5. Run amplify init
+1. Fork the parent repo
 6. Deploy each app sepparately
-   1. Admin App
-      1. cd covidtest_admin
-      2. amplify publish
-   2. Patient App
+   1.  Patient App
       1. cd covidtest_patient
       2. expo publish
-   3. Public App
-      1. cd covidtest_public
-      2. amplify publish
    
 
 
