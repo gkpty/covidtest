@@ -1,8 +1,6 @@
-# A platform to end a pandemic
-## An Open Source platform with mutliple applications to help:
+# A multi app platform for covid19 that aims to
 1. **Streamline the testing/treatment process of potential covid19 cases**
 2. **produce quality public Data and a heatmap visualization in real time**
-
 ## About
 *This platform is meant to be deployed and maintained by local governments and/or non-profit organizations that can provision covid19 tests and the mobile administration of these tests.*
 
