@@ -1,5 +1,5 @@
-node_modules/**/*
-.expo/*
+covidtest_patient/node_modules/**/*
+covidtest_patient/.expo/*
 npm-debug.*
 *.jks
 *.p8
@@ -7,23 +7,23 @@ npm-debug.*
 *.key
 *.mobileprovision
 *.orig.*
-web-build/
-web-report/
+covidtest_patient/web-build/
+covidtest_patient/web-report/
 
 # macOS
 .DS_Store
 
 #amplify
-amplify/\#current-cloud-backend
-amplify/.config/local-*
-amplify/mock-data
-amplify/backend/amplify-meta.json
-amplify/backend/awscloudformation
-build/
-dist/
-node_modules/
-aws-exports.js
-awsconfiguration.json
-amplifyconfiguration.json
-amplify-gradle-config.json
-amplifyxc.config
+covidtest_patient/amplify/\#current-cloud-backend
+covidtest_patient/amplify/.config/local-*
+covidtest_patient/amplify/mock-data
+covidtest_patient/amplify/backend/amplify-meta.json
+covidtest_patient/amplify/backend/awscloudformation
+covidtest_patient/build/
+covidtest_patient/dist/
+covidtest_patient/node_modules/
+covidtest_patient/aws-exports.js
+covidtest_patient/awsconfiguration.json
+covidtest_patient/amplifyconfiguration.json
+covidtest_patient/amplify-gradle-config.json
+covidtest_patient/amplifyxc.config

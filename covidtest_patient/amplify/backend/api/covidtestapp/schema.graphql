@@ -1,0 +1,43 @@
+type Patient @model {
+  id: ID!
+  document_type: DocumentType!
+  document_number: String!
+  name: String!
+  age: Int!
+  coordinates: Coordinates
+  cases: [Case] @connection(name: "PatientCases")
+  locations: [Location] @connection(name: "PatientLocations")
+}
+enum DocumentType {
+  cedula
+  pasaporte
+}
+type Case @model {
+  id: ID!
+  title: String!
+  patient: Patient @connection(name: "PatientCases")
+  tests: [Test] @connection(name: "CaseTests")
+  createdAt: String
+  updatedAt: String
+}
+enum Result {
+  positive
+  negative
+}
+type Test @model {
+  id: ID!
+  type: String!
+  result: Result
+  case: Case @connection(name: "CaseTests")
+}
+type Coordinates {
+  lat: Float!
+  lon: Float!
+}
+type Location @model{
+  id: ID!
+  platform: String!
+  coordinates: Coordinates!
+  patient: Patient @connection(name: "PatientLocations")
+  createdAt: String
+}
