@@ -47,11 +47,11 @@ It would be nice to help local organizations fighting corona virus recieve crowd
 3. Install the AWS Amplify CLI globally
 
 ## Installation
-1. Fork the parent repo
+1. Fork the repo
 6. Deploy each app sepparately
    1.  Patient App
-      1. cd covidtest_patient
-      2. expo publish
+      1. `cd covidtest_patient`
+      2. run `expo build:android` or `expo build:ios`
    
 
 
