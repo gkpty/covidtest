@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { TextInput, Button, View, StyleSheet } from 'react-native';
+import { TextInput, Button, Text, View, StyleSheet, Platform, TouchableOpacity } from 'react-native';
 import Amplify, { API } from 'aws-amplify';
 import awsmobile from '../aws-exports';
 Amplify.configure(awsmobile);
@@ -24,8 +24,9 @@ export default class CaseRequestForm extends Component {
     await API.graphql(graphqlOperation(createPatient, {input: input}))
       .then (result => {
           let patient_id = result.data.createPatient.id
-          console.log(patient_id)
-          SecureStore.setItemAsync("covidtest_patient_id", patient_id)
+          if(Platform.OS !== 'web'){
+            SecureStore.setItemAsync("covidtest_patient_id", patient_id)
+          }
           return 'Success'
       })
       .catch(err => {
@@ -47,7 +48,7 @@ export default class CaseRequestForm extends Component {
         });
   }
 
-  onPressStatus = () =>{
+  getPatientId = () =>{
     SecureStore.getItemAsync("covidtest_patient_id").then( data => {alert(data)})
   }
  
@@ -57,7 +58,7 @@ export default class CaseRequestForm extends Component {
 
   render() {
     return (
-      <View style={{padding: 30}}>
+      <View>
         <TextInput
           style={styles.formInput}
           placeholder="Name"
@@ -82,14 +83,18 @@ export default class CaseRequestForm extends Component {
           onChangeText={(document_number) => this.setState({document_number})}
           value={this.state.document_number}
         />
-         <Button
-          title="Press me"
+         <TouchableOpacity
+          style={[styles.iosBgButton, styles.bggreen, styles.mbextra]}
           onPress={this.onPressButton}
-        />
-        <Button
-          title="Press me patient"
-          onPress={this.onPressStatus}
-        />    
+          underlayColor='#fff'>
+          <Text style={styles.loginText}>Submit Case</Text>
+          </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.iosBgButton, styles.bgblue]}
+          onPress={this.getPatientId}
+          underlayColor='#fff'>
+          <Text style={styles.loginText}>Show Patient ID</Text>
+        </TouchableOpacity>   
       </View>
     );
   }
@@ -102,5 +107,22 @@ const styles = StyleSheet.create({
     borderColor: 'gray', 
     borderWidth: 1,
     marginBottom: 10
+  },
+  iosBgButton:{
+    borderRadius: 50,
+    height: 40, 
+    borderColor: 'gray', 
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingTop:10,
+    paddingBottom:10,
+    alignItems: "center"
+  },
+  mbextra: {marginBottom: 40},
+  bggreen: {
+    backgroundColor: '#30d158'
+  },
+  bgblue: {
+    backgroundColor:'#007aff'
   }
 });

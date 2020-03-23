@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 50,
     marginHorizontal: 16,
+    padding: 30,
     justifyContent: "center"
   },
   title: {

@@ -1,0 +1,370 @@
+type Patient {
+  id: ID!
+  document_type: DocumentType!
+  document_number: String!
+  name: String!
+  age: Int!
+  coordinates: Coordinates
+  cases(filter: ModelCaseFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelCaseConnection
+  locations(filter: ModelLocationFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelLocationConnection
+}
+
+enum DocumentType {
+  cedula
+  pasaporte
+}
+
+type Case {
+  id: ID!
+  title: String!
+  patient: Patient
+  tests(filter: ModelTestFilterInput, sortDirection: ModelSortDirection, limit: Int, nextToken: String): ModelTestConnection
+  createdAt: String
+  updatedAt: String
+}
+
+enum Result {
+  positive
+  negative
+}
+
+type Test {
+  id: ID!
+  type: String!
+  result: Result
+  case: Case
+}
+
+type Coordinates {
+  lat: Float!
+  lon: Float!
+}
+
+type Location {
+  id: ID!
+  platform: String!
+  coordinates: Coordinates!
+  patient: Patient
+  createdAt: String
+}
+
+input CoordinatesInput {
+  lat: Float!
+  lon: Float!
+}
+
+enum ModelSortDirection {
+  ASC
+  DESC
+}
+
+type ModelPatientConnection {
+  items: [Patient]
+  nextToken: String
+}
+
+input ModelStringInput {
+  ne: String
+  eq: String
+  le: String
+  lt: String
+  ge: String
+  gt: String
+  contains: String
+  notContains: String
+  between: [String]
+  beginsWith: String
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIDInput {
+  ne: ID
+  eq: ID
+  le: ID
+  lt: ID
+  ge: ID
+  gt: ID
+  contains: ID
+  notContains: ID
+  between: [ID]
+  beginsWith: ID
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+  size: ModelSizeInput
+}
+
+input ModelIntInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelFloatInput {
+  ne: Float
+  eq: Float
+  le: Float
+  lt: Float
+  ge: Float
+  gt: Float
+  between: [Float]
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelBooleanInput {
+  ne: Boolean
+  eq: Boolean
+  attributeExists: Boolean
+  attributeType: ModelAttributeTypes
+}
+
+input ModelSizeInput {
+  ne: Int
+  eq: Int
+  le: Int
+  lt: Int
+  ge: Int
+  gt: Int
+  between: [Int]
+}
+
+input ModelDocumentTypeInput {
+  eq: DocumentType
+  ne: DocumentType
+}
+
+input ModelPatientFilterInput {
+  id: ModelIDInput
+  document_type: ModelDocumentTypeInput
+  document_number: ModelStringInput
+  name: ModelStringInput
+  age: ModelIntInput
+  and: [ModelPatientFilterInput]
+  or: [ModelPatientFilterInput]
+  not: ModelPatientFilterInput
+}
+
+type Query {
+  getPatient(id: ID!): Patient
+  listPatients(filter: ModelPatientFilterInput, limit: Int, nextToken: String): ModelPatientConnection
+  getCase(id: ID!): Case
+  listCases(filter: ModelCaseFilterInput, limit: Int, nextToken: String): ModelCaseConnection
+  getTest(id: ID!): Test
+  listTests(filter: ModelTestFilterInput, limit: Int, nextToken: String): ModelTestConnection
+  getLocation(id: ID!): Location
+  listLocations(filter: ModelLocationFilterInput, limit: Int, nextToken: String): ModelLocationConnection
+}
+
+input CreatePatientInput {
+  id: ID
+  document_type: DocumentType!
+  document_number: String!
+  name: String!
+  age: Int!
+  coordinates: CoordinatesInput
+}
+
+input UpdatePatientInput {
+  id: ID!
+  document_type: DocumentType
+  document_number: String
+  name: String
+  age: Int
+  coordinates: CoordinatesInput
+}
+
+input DeletePatientInput {
+  id: ID
+}
+
+type Mutation {
+  createPatient(input: CreatePatientInput!, condition: ModelPatientConditionInput): Patient
+  updatePatient(input: UpdatePatientInput!, condition: ModelPatientConditionInput): Patient
+  deletePatient(input: DeletePatientInput!, condition: ModelPatientConditionInput): Patient
+  createCase(input: CreateCaseInput!, condition: ModelCaseConditionInput): Case
+  updateCase(input: UpdateCaseInput!, condition: ModelCaseConditionInput): Case
+  deleteCase(input: DeleteCaseInput!, condition: ModelCaseConditionInput): Case
+  createTest(input: CreateTestInput!, condition: ModelTestConditionInput): Test
+  updateTest(input: UpdateTestInput!, condition: ModelTestConditionInput): Test
+  deleteTest(input: DeleteTestInput!, condition: ModelTestConditionInput): Test
+  createLocation(input: CreateLocationInput!, condition: ModelLocationConditionInput): Location
+  updateLocation(input: UpdateLocationInput!, condition: ModelLocationConditionInput): Location
+  deleteLocation(input: DeleteLocationInput!, condition: ModelLocationConditionInput): Location
+}
+
+input ModelPatientConditionInput {
+  document_type: ModelDocumentTypeInput
+  document_number: ModelStringInput
+  name: ModelStringInput
+  age: ModelIntInput
+  and: [ModelPatientConditionInput]
+  or: [ModelPatientConditionInput]
+  not: ModelPatientConditionInput
+}
+
+enum ModelAttributeTypes {
+  binary
+  binarySet
+  bool
+  list
+  map
+  number
+  numberSet
+  string
+  stringSet
+  _null
+}
+
+type Subscription {
+  onCreatePatient: Patient @aws_subscribe(mutations: ["createPatient"])
+  onUpdatePatient: Patient @aws_subscribe(mutations: ["updatePatient"])
+  onDeletePatient: Patient @aws_subscribe(mutations: ["deletePatient"])
+  onCreateCase: Case @aws_subscribe(mutations: ["createCase"])
+  onUpdateCase: Case @aws_subscribe(mutations: ["updateCase"])
+  onDeleteCase: Case @aws_subscribe(mutations: ["deleteCase"])
+  onCreateTest: Test @aws_subscribe(mutations: ["createTest"])
+  onUpdateTest: Test @aws_subscribe(mutations: ["updateTest"])
+  onDeleteTest: Test @aws_subscribe(mutations: ["deleteTest"])
+  onCreateLocation: Location @aws_subscribe(mutations: ["createLocation"])
+  onUpdateLocation: Location @aws_subscribe(mutations: ["updateLocation"])
+  onDeleteLocation: Location @aws_subscribe(mutations: ["deleteLocation"])
+}
+
+type ModelCaseConnection {
+  items: [Case]
+  nextToken: String
+}
+
+input ModelCaseFilterInput {
+  id: ModelIDInput
+  title: ModelStringInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelCaseFilterInput]
+  or: [ModelCaseFilterInput]
+  not: ModelCaseFilterInput
+}
+
+input CreateCaseInput {
+  id: ID
+  title: String!
+  createdAt: String
+  updatedAt: String
+  casePatientId: ID
+}
+
+input UpdateCaseInput {
+  id: ID!
+  title: String
+  createdAt: String
+  updatedAt: String
+  casePatientId: ID
+}
+
+input DeleteCaseInput {
+  id: ID
+}
+
+input ModelCaseConditionInput {
+  title: ModelStringInput
+  createdAt: ModelStringInput
+  updatedAt: ModelStringInput
+  and: [ModelCaseConditionInput]
+  or: [ModelCaseConditionInput]
+  not: ModelCaseConditionInput
+}
+
+type ModelTestConnection {
+  items: [Test]
+  nextToken: String
+}
+
+input ModelResultInput {
+  eq: Result
+  ne: Result
+}
+
+input ModelTestFilterInput {
+  id: ModelIDInput
+  type: ModelStringInput
+  result: ModelResultInput
+  and: [ModelTestFilterInput]
+  or: [ModelTestFilterInput]
+  not: ModelTestFilterInput
+}
+
+input CreateTestInput {
+  id: ID
+  type: String!
+  result: Result
+  testCaseId: ID
+}
+
+input UpdateTestInput {
+  id: ID!
+  type: String
+  result: Result
+  testCaseId: ID
+}
+
+input DeleteTestInput {
+  id: ID
+}
+
+input ModelTestConditionInput {
+  type: ModelStringInput
+  result: ModelResultInput
+  and: [ModelTestConditionInput]
+  or: [ModelTestConditionInput]
+  not: ModelTestConditionInput
+}
+
+type ModelLocationConnection {
+  items: [Location]
+  nextToken: String
+}
+
+input ModelLocationFilterInput {
+  id: ModelIDInput
+  platform: ModelStringInput
+  createdAt: ModelStringInput
+  and: [ModelLocationFilterInput]
+  or: [ModelLocationFilterInput]
+  not: ModelLocationFilterInput
+}
+
+input CreateLocationInput {
+  id: ID
+  platform: String!
+  coordinates: CoordinatesInput!
+  createdAt: String
+  locationPatientId: ID
+}
+
+input UpdateLocationInput {
+  id: ID!
+  platform: String
+  coordinates: CoordinatesInput
+  createdAt: String
+  locationPatientId: ID
+}
+
+input DeleteLocationInput {
+  id: ID
+}
+
+input ModelLocationConditionInput {
+  platform: ModelStringInput
+  createdAt: ModelStringInput
+  and: [ModelLocationConditionInput]
+  or: [ModelLocationConditionInput]
+  not: ModelLocationConditionInput
+}

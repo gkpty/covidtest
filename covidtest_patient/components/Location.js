@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Platform, Text, View, StyleSheet, Button } from 'react-native';
+import { Platform, Text, View, StyleSheet, Button, TouchableOpacity } from 'react-native';
 import Amplify, { API } from 'aws-amplify';
 import awsmobile from '../aws-exports';
 Amplify.configure(awsmobile);
@@ -10,7 +10,7 @@ import * as Permissions from 'expo-permissions';
 import {createLocation} from '../src/graphql/mutations'
 import * as TaskManager from 'expo-task-manager';
 
-const LOCATION_TASK_NAME = 'background-location-task'
+//const LOCATION_TASK_NAME = 'background-location-task'
 
 export default class LocationUpdate extends Component {
   state = {
@@ -38,7 +38,6 @@ export default class LocationUpdate extends Component {
         timeInterval:"3", 
         distanceInterval:"1"
       }); */
-
       Location.watchPositionAsync({distanceInterval:"20"}, (location)=>{
         this.setState({ location });
         console.log(location)
@@ -71,22 +70,17 @@ export default class LocationUpdate extends Component {
       });
   }
 
- /*  onPressButton = () =>{
-    let data = {
-      "type":Platform.OS,
-      "coordinates":{
-        "lat":this.state.location.coords.latitude,
-        "lon":this.state.location.coords.longitude
-      }
-    }
-    this.CreateLocation(data)
-  } */
-  
-  /* componentDidMount(){
-    this._watchLocationAsync()
-  } */
+ onPressButton = () =>{
+  let text = 'Waiting..';
+  if (this.state.errorMessage) {
+    text = this.state.errorMessage;
+  } else if (this.state.location) {
+    text = JSON.stringify(this.state.location);
+  }
+   alert(text)
+  }
 
-/*   _getLocationAsync = async () => {
+  /*_getLocationAsync = async () => {
     let { status } = await Permissions.askAsync(Permissions.LOCATION);
     if (status !== 'granted') {
       this.setState({
@@ -101,20 +95,15 @@ export default class LocationUpdate extends Component {
   
 
   render() {
-    let text = 'Waiting..';
-    if (this.state.errorMessage) {
-      text = this.state.errorMessage;
-    } else if (this.state.location) {
-      text = JSON.stringify(this.state.location);
-    }
 
     return (
       <View style={styles.container}>
-        <Text style={styles.paragraph}>{text}</Text>
-        <Button
-          title="Press me"
+        <TouchableOpacity
+          style={styles.iosBgButton}
           onPress={this.onPressButton}
-        />  
+          underlayColor='#fff'>
+          <Text style={styles.loginText}>get latest location</Text>
+        </TouchableOpacity> 
       </View>
     );
   }
@@ -141,12 +130,16 @@ TaskManager.defineTask(LOCATION_TASK_NAME, ({ data, error }) => {
 }); */
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
+  iosBgButton:{
+    borderRadius: 50,
+    height: 40, 
+    borderColor: 'gray', 
+    borderWidth: 1,
+    marginBottom: 10,
+    paddingTop:10,
+    paddingBottom:10,
+    backgroundColor:'#007aff',
+    alignItems: "center"
   },
   paragraph: {
     margin: 24,
